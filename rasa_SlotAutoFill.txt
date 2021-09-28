@@ -1,0 +1,36 @@
+Slot Auto-fill#
+The slot will be set automatically if your NLU model picks up an entity, and your domain contains a slot with the same name, provided the following conditions are met:
+
+store_entities_as_slots is set to true
+the slot's auto_fill property is set to true
+For example:
+
+stories:
+- story: entity slot-filling
+  steps:
+  - intent: greet
+    entities:
+    - name: Ali
+  - slot_was_set:
+    - name: Ali
+  - action: utter_greet_by_name
+In this case, you don't have to include the slot_was_set part in the story, because it is automatically picked up:
+
+stories:
+- story: entity slot-filling
+  steps:
+  - intent: greet
+    entities:
+    - name: Ali
+  - action: utter_greet_by_name
+AUTO-FILLED SLOTS & INFLUENCE_CONVERSATION
+An auto-filled slot that is defined with influence_conversation: true will influence the conversation the same way any other slot does.
+
+In the example above, if the name slot's type is text, then it only matters that some name was detected, but it won't matter which one. If the name slot is type categorical, then the behaviour will vary depending on the categories you have defined for the slot.
+
+Explicitly including a slot_was_set step in your story can make the behaviour of an auto-filled slot that influences the conversation clearer, and will not change the behaviour of your story.
+
+
+
+如果domain中没有配置slot,story中的entity对对话流程的影响:有没有值，至于值是什么，不影响
+如果domain中有配置slot，story中的entity对对话流程的影响:即slot对对话流程的影响(取决于slot的类型)
