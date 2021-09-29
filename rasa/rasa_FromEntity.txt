@@ -1,0 +1,30 @@
+forms:
+  your_form:
+    required_slots:
+        departure_city:
+          - type: from_entity
+            entity: city
+            role: from
+          - type: from_entity
+            entity: city
+        arrival_city:
+          - type: from_entity
+            entity: city
+            role: to
+          - type: from_entity
+            entity: city
+        arrival_date:
+          - type: from_entity
+            entity: date
+
+In the example above, an entity date uniquely sets the slot arrival_date, 
+an entity city with a role from uniquely sets the slot departure_city 
+and an entity city with a role to uniquely sets the slot arrival_city,
+therefore they can be used to fit corresponding slots even if these slots were not requested.
+However, entity city without a role can fill both departure_city and arrival_city slots,
+depending which one is requested, so if an entity city isextracted when slot arrival_date is requested, it'll be ignored by the form.
+
+
+理解:如果实体名唯一对应一个slot，若实体在form执行utter_ask_slot_name前已经提取到时，slot的值会自动填充，form不会再执行utter_ask_slot_name，
+但如果实体名对应多个slot,即使实体在form执行utter_ask_slot_name前已经提取到，slot也不会自动填充，因为form不知道
+应该对应哪个slot，此时还是会执行utter_ask_slot_name,如上例，form会依次执行utter_ask_arrival_city和utter_ask_departure_city
