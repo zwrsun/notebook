@@ -1,0 +1,16 @@
+将开发者文档给的代码中的
+map(sha1.update, list)
+改为
+sha1.update("".join(list).encode('utf-8'))
+
+
+原因:开发者文档中给的代码是python2的用法，本机装的是python3
+
+
+
+将开发者文档给的代码中的
+except Exception,Argument
+改为
+except Exception as Argument
+
+原因:同上
