@@ -1,0 +1,20 @@
+git branch -f a c:将a分支强制移动到提交记录c
+git branch -f a b:将a分支强制移动到b分支指向的地方
+git branch -f a HEAD^:将a分支强制移动到当前head指向的上一个结点
+
+git pull = git fetch+git merge
+git pull --rebase = git fetch+git rebase
+
+git checkout -b feature c2:创建新的分支feature，并将其指向提交记录c2
+git checkout -b foo o/main:让foo分支跟踪远程main分支
+
+git rebase c1 c2 :将c2添加到c1后面
+
+git push origin main:将本地的Main分支推送到远程的Main分支
+git push origin main:newbranch    将本地的Main分支推送到远程仓库的newbranch，不存在将创建
+git push origin foo^:main   将foo分支(不包含当前所指记录的全部记录)推送到远程仓库的main分支
+
+
+git fetch origin <source>:<destination>
+git pullorigin <source>:<destination>
+git fetch与git push类似，只不过push中的目的地是远程仓库，而fetch的目的地是本地仓库
